@@ -1,5 +1,5 @@
 homepage: "https://github.com/metryxstudio/city-normalizer"
 documentation: "https://github.com/metryxstudio/city-normalizer#readme"
 versions:
-  - sha: # Add your commit SHA after pushing to GitHub
+  - sha: b6ae1598e15b9c52734154c5bb88b9c85f4f8561
     changeNotes: "Initial release"
