@@ -1,6 +1,6 @@
 # City Normalizer
 
-A server-side Google Tag Manager variable template that normalizes city names for server-side tracking by removing spaces, punctuation, and numbers while preserving UTF-8 characters.
+A Google Tag Manager variable template for both web and server containers that normalizes city names for server-side tracking by removing spaces, punctuation, and numbers while preserving UTF-8 characters.
 
 ## Overview
 
@@ -8,7 +8,7 @@ This template processes city names to meet the normalization requirements of adv
 
 ## Installation
 
-1. In your server-side GTM container, go to **Templates** → **Variable Templates** → **Search Gallery**
+1. In your GTM container (web or server-side), go to **Templates** → **Variable Templates** → **Search Gallery**
 2. Search for "City Normalizer"
 3. Click **Add to workspace**
 
@@ -45,6 +45,12 @@ This template processes city names to meet the normalization requirements of adv
 1. Create a variable using this template
 2. Set **Raw City Name** to your city data source (e.g., `{{Event Data - city}}`)
 3. Use the normalized output in your tracking tags
+
+## Compatibility
+
+This template works in both:
+- **Web GTM** containers
+- **Server-side GTM** containers
 
 ## Author
 

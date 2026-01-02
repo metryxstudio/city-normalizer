@@ -15,7 +15,8 @@ ___INFO___
   "displayName": "City Normalizer",
   "description": "Normalizes city names for server-side tracking by removing spaces, punctuation, and numbers while preserving UTF-8 characters.",
   "containerContexts": [
-    "SERVER"
+    "SERVER",
+    "WEB"
   ],
   "categories": ["UTILITY"],
   "brand": {
@@ -83,6 +84,61 @@ var normalizeCity = function(data) {
 };
 
 return normalizeCity(data);
+
+
+___SANDBOXED_JS_FOR_WEB_TEMPLATE___
+
+var makeString = require('makeString');
+
+/**
+ * Normalizes city names for hashing: converts to lowercase, removes spaces, punctuation,
+ * and numbers, but preserves UTF-8 special characters (accents, diacritics).
+ * Returns undefined for missing/invalid cities to prevent sending empty values.
+ * Compliant with Facebook, Google, TikTok normalization requirements.
+ * 
+ * Example: "New York" → "newyork", "São Paulo" → "saopaulo", "Čakovec" → "čakovec"
+ * 
+ * @param {Object} data - Input object containing the raw city name.
+ * @returns {string|undefined} The normalized city string, or undefined if input is invalid.
+ */
+var normalizeCity = function(data) {
+  var rawCity = data.rawCity;
+
+  if (!rawCity) {
+    return undefined;
+  }
+
+  var cityString = makeString(rawCity).trim().toLowerCase();
+  
+  if (cityString.length === 0) {
+    return undefined;
+  }
+  
+  var normalizedCity = '';
+  var charsToRemove = ' \'"-.,;:!?()[]{}/@#$%^&*+=_|\\<>~`0123456789';
+  
+  for (var i = 0; i < cityString.length; i++) {
+    var char = cityString.charAt(i);
+    
+    if (charsToRemove.indexOf(char) === -1) {
+      normalizedCity = normalizedCity + char;
+    }
+  }
+  
+  if (normalizedCity.length === 0) {
+    return undefined;
+  }
+  
+  return normalizedCity;
+};
+
+return normalizeCity(data);
+
+
+
+___WEB_PERMISSIONS___
+
+[]
 
 
 ___SERVER_PERMISSIONS___
